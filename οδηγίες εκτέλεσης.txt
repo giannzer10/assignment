@@ -1,0 +1,5 @@
+Για να τρέξει χρησιμοποιούμε:
+
+make -f AssignmentFinal.make
+
+και τρέχουμε το παραγόμενο εκτελέσιμο "AssignmentFinal"
