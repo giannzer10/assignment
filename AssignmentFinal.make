@@ -1,20 +1,9 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -O2
-LDFLAGS =
+all: AssignmentFinal
+AssignmentFinal: AssignmentFinal.o
+	gcc -o AssignmentFinal AssignmentFinal.o
 
-SRC = AssignmentFinal.c
-HDR = diloseis.h
-OBJ = $(SRC:.c=.o)
+AssignmentFinal.o: AssignmentFinal.c diloseis.h
+	gcc -c AssignmentFinal.c -o AssignmentFinal.o
 
-TARGET = AssignmentFinal
-
-all: $(TARGET)
-
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-
-%.o: %.c $(HDR)
-	$(CC) $(CFLAGS) -c $< -o $@
 clean:
-	rm -f $(OBJ) $(TARGET)
-.PHONY: all clean
+	rm -f *.o AssignmentFinal
