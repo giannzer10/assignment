@@ -23,7 +23,7 @@ int main() {
 
             for (int order = 0; order < ORDERS_PER_CUSTOMER; order++) {
                 int product_id;
-                product_id = num_gen(); // Use num_gen to generate product ID
+                product_id = num_gen(); // Use num_gen to generate product ID (1-based)
 
                 // Send order to parent
                 write(child_to_parent[customer - 1][1], &product_id, sizeof(product_id));
@@ -34,10 +34,33 @@ int main() {
                 read(parent_to_child[customer - 1][0], &success, sizeof(success));
                 read(parent_to_child[customer - 1][0], &price, sizeof(price));
 
-                total_spent += success ? price : 0.0;
+                if (success) {
+    		total_spent += price;
+		}
+		else
+		{
+    			total_spent += 0.0;
+		}
+
+		const char* result;
+		if (success) {
+    		result = "Success";
+		}
+		else {
+    		result = "Failure";
+			}
+
+		double temp_timi;
+		if (success) {
+    		temp_timi = price;
+		} else
+		{
+    		temp_timi = 0.0;
+		}
+
 
                 printf("Customer %d: Product %d -> %s, Price: %.2f\n", 
-                       customer, product_id, success ? "Success" : "Failure", success ? price : 0.0);
+                       customer, product_id, result, temp_timi);
 
                 sleep(1); // Wait before sending next order
             }
